@@ -1,59 +1,64 @@
 #include <stdio.h>
-#include <math.h>
-int main() {
+#include <math.h> 
+int main() 
+{
     char operator;
     double num1, num2, result;
-    printf("Enter an operator (+, -, *, /, ^, sqrt, %): \n");
-    scanf("%c", &operator);
-    if (operator == 'r')
+    printf("Enter an operator (+, -, *, /, %, l): ");
+    scanf(" %c", &operator); 
+    printf("Enter first number: ");
+    scanf("%lf", &num1);
+    printf("Enter second number: ");
+    scanf("%lf", &num2);
+    switch (operator) 
     {
-        printf("Enter a number: ");
-        scanf("%lf", &num1);
-        if (num1 >= 0) 
-        {
-            result = sqrt(num1);
-            printf("Square root of %.2lf = %.2lf\n", num1, result);
-        } 
-        else
-        {
-            printf("Error: Square root of a negative number is not real.\n");
-        }
-    } 
-    else 
-    {
-        printf("Enter two numbers: ");
-        scanf("%lf %lf", &num1, &num2);
-        if (operator == '+')
-        {
+        case '+':
             result = num1 + num2;
             printf("%.2lf + %.2lf = %.2lf\n", num1, num2, result);
-        }
-        else if (operator == '-') {
+            break;
+        case '-':
             result = num1 - num2;
             printf("%.2lf - %.2lf = %.2lf\n", num1, num2, result);
-        } else if (operator == '*') {
+            break;
+        case '*':
             result = num1 * num2;
             printf("%.2lf * %.2lf = %.2lf\n", num1, num2, result);
-        } else if (operator == '/') {
-            if (num2 != 0) {
+            break;
+        case '/':
+            if (num2 == 0) 
+            {
+                printf("Error: Division by zero!\n");
+            } 
+            else 
+            {
                 result = num1 / num2;
                 printf("%.2lf / %.2lf = %.2lf\n", num1, num2, result);
-            } else {
-                printf("Error: Division by zero is not allowed.\n");
             }
-        } else if (operator == '%') {
-            if ((int)num2 != 0) {
-                result = (int)num1 % (int)num2;
-                printf("%d %% %d = %d\n", (int)num1, (int)num2, (int)result);
-            } else {
-                printf("Error: Modulus by zero is not allowed.\n");
+            break;
+        case '%':
+            if (num2 == 0) 
+            {
+                printf("Error: Modulo by zero!\n");
+            } 
+            else 
+            {
+                result = fmod(num1, num2); 
+                printf("%.2lf%% of %.2lf = %.2lf\n", num1, num2, result);
             }
-        } else if (operator == '^') {
-            result = pow(num1, num2);
-            printf("%.2lf ^ %.2lf = %.2lf\n", num1, num2, result);
-        } else {
-            printf("Error: Invalid operator.\n");
-        }
+            break;
+            case 'l':
+            if (num1 <= 0) {
+                printf("Error: Logarithm of non-positive number!\n");
+            } 
+            else 
+            {
+                result = log10(num1); 
+                printf("log10(%.2lf) = %.2lf\n", num1, result);
+            }
+            break;
+        default:
+            printf("Error! Operator is not correct\n");
     }
+
     return 0;
 }
